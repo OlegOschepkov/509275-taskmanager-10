@@ -194,7 +194,7 @@ const getCardTempl = () => {
 };
 
 const getCardEditTempl = () => {
-  return(
+  return (
     `<article class="card card--edit card--yellow card--repeat">
             <form class="card__form" method="get">
               <div class="card__inner">
@@ -460,7 +460,7 @@ const getLoadMoreBtnTempl = () => {
 };
 
 const render = (container, temlate, place) => {
-  container.insertAdjacentHTML(place, temlate)
+  container.insertAdjacentHTML(place, temlate);
 };
 
 const mainElem = document.querySelector(`main`);
@@ -470,7 +470,7 @@ render(headerElem, getMenuTempl(), `beforeend`);
 render(mainElem, getFilterTempl(), `beforeend`);
 render(mainElem, getBoardTempl(), `beforeend`);
 
-const listElem = mainElem.querySelector('.board__tasks');
+const listElem = mainElem.querySelector(`.board__tasks`);
 
 render(listElem, getCardEditTempl(), `beforeend`);
 
