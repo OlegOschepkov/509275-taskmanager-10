@@ -1,3 +1,5 @@
+'use strict';
+
 const TASKS_COUNT = 3;
 
 const getMenuTempl = () => {
@@ -30,7 +32,7 @@ const getMenuTempl = () => {
             >STATISTICS</label
           >
   </section>`
-  )
+  );
 };
 
 const getFilterTempl = () => {
@@ -103,7 +105,7 @@ const getFilterTempl = () => {
           >Archive <span class="filter__archive-count">115</span></label
         >
       </section>`
-  )
+  );
 };
 
 const getBoardTempl = () => {
@@ -118,11 +120,11 @@ const getBoardTempl = () => {
         <div class="board__tasks">
         </div>
    </section>`
-  )
+  );
 };
 
 const getCardTempl = () => {
-  return(
+  return (
     `<article class="card card--black">
       <div class="card__form">
          <div class="card__inner">
@@ -188,7 +190,7 @@ const getCardTempl = () => {
          </div>
       </div>
   </article>`
-  )
+  );
 };
 
 const getCardEditTempl = () => {
@@ -448,21 +450,21 @@ const getCardEditTempl = () => {
               </div>
             </form>
           </article>`
-  )
+  );
 };
 
 const getLoadMoreBtnTempl = () => {
-  return(
+  return (
     `<button class="load-more" type="button">load more</button>`
-  )
+  );
 };
 
 const render = (container, temlate, place) => {
   container.insertAdjacentHTML(place, temlate)
 };
 
-const mainElem = document.querySelector('main');
-const headerElem = mainElem.querySelector('.main__control');
+const mainElem = document.querySelector(`main`);
+const headerElem = mainElem.querySelector(`.main__control`);
 
 render(headerElem, getMenuTempl(), `beforeend`);
 render(mainElem, getFilterTempl(), `beforeend`);
@@ -478,4 +480,4 @@ new Array(TASKS_COUNT).fill(``).forEach(() =>
 
 const boardElem = mainElem.querySelector(`.board`);
 
-render(boardElem, getLoadMoreBtnTempl(),`beforeend`);
+render(boardElem, getLoadMoreBtnTempl(), `beforeend`);
