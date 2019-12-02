@@ -1,5 +1,1 @@
-export const getLoadMoreBtnTempl = () => {
-  return (
-    `<button class="load-more" type="button">load more</button>`
-  );
-};
+export const getLoadMoreBtnTempl = () => `<button class="load-more" type="button">load more</button>`;
