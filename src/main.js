@@ -1,33 +1,50 @@
-import {getBoardTempl} from './components/board';
-import {getMenuTempl} from './components/menu';
-import {getFilterTempl} from './components/filter';
-import {getCardTempl} from './components/card';
-import {getCardEditTempl} from './components/card-edit';
-import {getLoadMoreBtnTempl} from './components/load-more-btn';
+import {getBoardTemplate} from './components/board';
+import {getMenuTemplate} from './components/menu';
+import {getFilterTemplate} from './components/filter';
+import {getCardTemplate} from './components/card';
+import {getCardEditTemplate} from './components/card-edit';
+import {getLoadMoreBtnTemplate} from './components/load-more-btn';
+import {generateTasks} from './mock/task.js';
+import {generateFilters} from './mock/filter.js';
 
-const TASKS_COUNT = 3;
+const TASKS_COUNT = 22;
+const SHOWING_TASKS_COUNT_ON_START = 8;
+const SHOWING_TASKS_COUNT_BY_BUTTON = 8;
 
+const render = (container, temlate, place) => container.insertAdjacentHTML(place, temlate);
 
+const mainElement = document.querySelector(`main`);
+const headerElement = mainElement.querySelector(`.main__control`);
 
-const render = (container, temlate, place) => {
-  container.insertAdjacentHTML(place, temlate);
-};
+render(headerElement, getMenuTemplate(), `beforeend`);
 
-const mainElem = document.querySelector(`main`);
-const headerElem = mainElem.querySelector(`.main__control`);
+const filters = generateFilters();
+render(mainElement, getFilterTemplate(filters), `beforeend`);
 
-render(headerElem, getMenuTempl(), `beforeend`);
-render(mainElem, getFilterTempl(), `beforeend`);
-render(mainElem, getBoardTempl(), `beforeend`);
+render(mainElement, getBoardTemplate(), `beforeend`);
 
-const listElem = mainElem.querySelector(`.board__tasks`);
+const listElement = mainElement.querySelector(`.board__tasks`);
 
-render(listElem, getCardEditTempl(), `beforeend`);
+const tasks = generateTasks(TASKS_COUNT);
 
-new Array(TASKS_COUNT).fill(``).forEach(() =>
-  render(listElem, getCardTempl(), `beforeend`)
-);
+render(listElement, getCardEditTemplate(tasks[0]), `beforeend`);
 
-const boardElem = mainElem.querySelector(`.board`);
+const boardElement = mainElement.querySelector(`.board`);
+render(boardElement, getLoadMoreBtnTemplate(), `beforeend`);
 
-render(boardElem, getLoadMoreBtnTempl(), `beforeend`);
+let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
+tasks.slice(1, showingTasksCount).forEach((task) => render(listElement, getCardTemplate(task), `beforeend`));
+
+const loadMoreButton = boardElement.querySelector(`.load-more`);
+
+loadMoreButton.addEventListener(`click`, () => {
+  const prevTasksCount = showingTasksCount;
+  showingTasksCount = showingTasksCount + SHOWING_TASKS_COUNT_BY_BUTTON;
+
+  tasks.slice(prevTasksCount, showingTasksCount)
+    .forEach((task) => render(listElement, getCardTemplate(task), `beforeend`));
+
+  if (showingTasksCount >= tasks.length) {
+    loadMoreButton.remove();
+  }
+});
