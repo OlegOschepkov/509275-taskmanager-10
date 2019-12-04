@@ -1,4 +1,4 @@
-export const getBoardTempl = () =>
+export const getBoardTemplate = () =>
   `<section class="board container">
       <div class="board__filter-list">
         <a href="#" class="board__filter">SORT BY DEFAULT</a>

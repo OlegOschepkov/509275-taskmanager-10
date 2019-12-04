@@ -1,4 +1,4 @@
-export const getMenuTempl = () =>
+export const getMenuTemplate = () =>
   `<section class="control__btn-wrap">
      <input
             type="radio"

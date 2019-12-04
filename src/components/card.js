@@ -15,10 +15,7 @@ const getHashtagsMarkup = (hashtags) => {
     .join(`\n`);
 };
 
-export const getCardTempl = (task) => {
-  // Подсказка:
-  // Все работу производим заранее. Внутри шаблонной строки никаких вычислений не делаем,
-  // потому что внутри большой разметки сложно искать какой-либо код.
+export const getCardTemplate = (task) => {
   const {description, tags, dueDate, color, repeatingDays} = task;
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
