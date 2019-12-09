@@ -46,9 +46,6 @@ const listElement = boardComponent.getElement().querySelector(`.board__tasks`);
 
 const tasks = generateTasks(TASKS_COUNT);
 
-const boardElement = mainElement.querySelector(`.board`);
-render(boardElement, new LoadMoreButtonComponent().getElement(), RenderPosition.BEFOREEND);
-
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 
 tasks.slice(0, showingTasksCount).forEach((task) =>  renderTask(task));
