@@ -32,4 +32,4 @@ const formatTime = (date) => {
   return `${hours}:${minutes} ${interval}`;
 };
 
-export {RenderPosition, createElement, render, formatTime}
+export {RenderPosition, createElement, render, formatTime};

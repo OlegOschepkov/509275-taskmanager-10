@@ -48,7 +48,7 @@ const tasks = generateTasks(TASKS_COUNT);
 
 let showingTasksCount = SHOWING_TASKS_COUNT_ON_START;
 
-tasks.slice(0, showingTasksCount).forEach((task) =>  renderTask(task));
+tasks.slice(0, showingTasksCount).forEach((task) => renderTask(task));
 
 const loadMoreButtonComponent = new LoadMoreButtonComponent();
 
