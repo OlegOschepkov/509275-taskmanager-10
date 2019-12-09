@@ -1,5 +1,5 @@
 import {MonthNames} from '../const.js';
-import {formatTime} from '../utils.js';
+import {createElement, formatTime} from '../utils.js';
 
 const getHashtagsMarkup = (hashtags) => {
   return hashtags
@@ -15,7 +15,7 @@ const getHashtagsMarkup = (hashtags) => {
     .join(`\n`);
 };
 
-export const getCardTemplate = (task) => {
+const getCardTemplate = (task) => {
   const {description, tags, dueDate, color, repeatingDays} = task;
 
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
@@ -38,10 +38,7 @@ export const getCardTemplate = (task) => {
             <button type="button" class="card__btn card__btn--archive">
               archive
             </button>
-            <button
-              type="button"
-              class="card__btn card__btn--favorites card__btn--disabled"
-            >
+            <button type="button" class="card__btn card__btn--favorites card__btn--disabled">
               favorites
             </button>
           </div>
@@ -75,3 +72,26 @@ export const getCardTemplate = (task) => {
     </article>`
   );
 };
+
+export default class Card {
+  constructor(task) {
+    this._task = task;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return getCardTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}

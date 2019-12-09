@@ -1,5 +1,5 @@
 import {Colors, Days, MonthNames} from '../const.js';
-import {formatTime} from '../utils.js';
+import {createElement, formatTime} from '../utils.js';
 
 const getColorsMarkup = (colors, currentColor) => {
   return colors
@@ -65,7 +65,7 @@ const getHashtags = (tags) => {
     .join(`\n`);
 };
 
-export const getCardEditTemplate = (task) => {
+const getCardEditTemplate = (task) => {
   const {description, tags, dueDate, color, repeatingDays} = task;
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
@@ -156,3 +156,26 @@ export const getCardEditTemplate = (task) => {
       </article>`
   );
 };
+
+export default class CardEdit {
+  constructor(task) {
+    this._task = task;
+    this._element = null;
+  }
+
+  getTemplate() {
+    return getCardEditTemplate(this._task);
+  }
+
+  getElement() {
+    if (!this._element) {
+      this._element = createElement(this.getTemplate());
+    }
+
+    return this._element;
+  }
+
+  removeElement() {
+    this._element = null;
+  }
+}
