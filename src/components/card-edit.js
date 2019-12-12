@@ -158,7 +158,7 @@ const getCardEditTemplate = (task) => {
   );
 };
 
-export default class CardEdit extends AbstractComponent{
+export default class CardEdit extends AbstractComponent {
   constructor(task) {
     super();
     this._task = task;
@@ -169,7 +169,6 @@ export default class CardEdit extends AbstractComponent{
   }
 
   setSubmitHandler(handler) {
-    this.getElement().querySelector(`form`)
-      .addEventListener(`submit`, handler);
+    this.getElement().querySelector(`form`).addEventListener(`submit`, handler);
   }
 }

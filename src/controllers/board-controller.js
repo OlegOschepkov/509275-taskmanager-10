@@ -80,5 +80,5 @@ export default class BoardController {
         remove(this._loadMoreButtonComponent);
       }
     });
-  };
+  }
 }
