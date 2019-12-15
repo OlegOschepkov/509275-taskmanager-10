@@ -1,6 +1,16 @@
-import {MonthNames} from '../const.js';
-import {formatTime} from '../utils/common.js';
+import {formatTime, formatDate} from '../utils/common.js';
 import AbstractComponent from './abstract-component.js';
+
+const getButtonMarkup = (name, isActive) => {
+  return (
+    `<button
+      type="button"
+      class="card__btn card__btn--${name} ${isActive ? `` : `card__btn--disabled`}"
+    >
+      ${name}
+    </button>`
+  );
+};
 
 const getHashtagsMarkup = (hashtags) => {
   return hashtags
@@ -22,26 +32,23 @@ const getCardTemplate = (task) => {
   const isExpired = dueDate instanceof Date && dueDate < Date.now();
   const isDateShowing = !!dueDate;
 
-  const date = isDateShowing ? `${dueDate.getDate()} ${MonthNames[dueDate.getMonth()]}` : ``;
+  const date = isDateShowing ? formatDate(dueDate) : ``;
   const time = isDateShowing ? formatTime(dueDate) : ``;
   const hashtags = getHashtagsMarkup(Array.from(tags));
   const repeatClass = Object.values(repeatingDays).some(Boolean) ? `card--repeat` : ``;
   const deadlineClass = isExpired ? `card--deadline` : ``;
+  const editButton = getButtonMarkup(`edit`, true);
+  const archiveButton = getButtonMarkup(`archive`, task.isArchive);
+  const favoritesButton = getButtonMarkup(`favorites`, task.isFavorite);
 
   return (
     `<article class="card card--${color} ${repeatClass} ${deadlineClass}">
       <div class="card__form">
         <div class="card__inner">
           <div class="card__control">
-            <button type="button" class="card__btn card__btn--edit">
-              edit
-            </button>
-            <button type="button" class="card__btn card__btn--archive">
-              archive
-            </button>
-            <button type="button" class="card__btn card__btn--favorites card__btn--disabled">
-              favorites
-            </button>
+            ${editButton}
+            ${archiveButton}
+            ${favoritesButton}
           </div>
           <div class="card__color-bar">
             <svg class="card__color-bar-wave" width="100%" height="10">
@@ -86,5 +93,15 @@ export default class Card extends AbstractComponent {
 
   setEditButtonClickHandler(handler) {
     this.getElement().querySelector(`.card__btn--edit`).addEventListener(`click`, handler);
+  }
+
+  setFavoritesButtonClickHandler(handler) {
+    this.getElement().querySelector(`.card__btn--favorites`)
+      .addEventListener(`click`, handler);
+  }
+
+  setArchiveButtonClickHandler(handler) {
+    this.getElement().querySelector(`.card__btn--archive`)
+      .addEventListener(`click`, handler);
   }
 }
