@@ -1,6 +1,4 @@
 import LoadMoreButtonComponent from '../components/load-more-btn.js';
-// import CardComponent from '../components/card.js';
-// import CardEditComponent from '../components/card-edit.js';
 import SortComponent, {SortType} from '../components/sort.js';
 import TasksListComponent from '../components/tasks-list.js';
 import NoTasksListComponent from '../components/no-tasks-list.js';
@@ -15,46 +13,8 @@ const renderTasks = (taskListElement, tasks, onDataChange, onViewChange) => {
     const taskController = new TaskController(taskListElement, onDataChange, onViewChange);
     taskController.render(task);
     return taskController;
-  })
+  });
 };
-
-// const renderTask = (taskListElement, task) => {
-//   const onEscKeyDown = (evt) => {
-//     const isEscKey = evt.key === `Escape` || evt.key === `Esc`;
-//
-//     if (isEscKey) {
-//       replaceEditToTask();
-//       document.removeEventListener(`keydown`, onEscKeyDown);
-//     }
-//   };
-//
-//   const replaceEditToTask = () => {
-//     replace(cardComponent, cardEditComponent);
-//   };
-//
-//   const replaceTaskToEdit = () => {
-//     replace(cardEditComponent, cardComponent);
-//   };
-//
-//   const cardComponent = new CardComponent(task);
-//
-//   cardComponent.setEditButtonClickHandler(() => {
-//     replaceTaskToEdit();
-//     document.addEventListener(`keydown`, onEscKeyDown);
-//   });
-//
-//   const cardEditComponent = new CardEditComponent(task);
-//
-//   cardEditComponent.setSubmitHandler(replaceEditToTask);
-//
-//   render(taskListElement, cardComponent, RenderPosition.BEFOREEND);
-// };
-
-// const renderTasks = (taskListElement, tasks) => {
-//   tasks.forEach((task) => {
-//     renderTask(taskListElement, task);
-//   });
-// };
 
 export default class BoardController {
   constructor(container) {
@@ -163,28 +123,4 @@ export default class BoardController {
       remove(this._loadMoreButtonComponent);
     }
   }
-  //   this._sortComponent.setSortTypeChangeHandler((sortType) => {
-  //     let sortedTasks = [];
-  //
-  //     switch (sortType) {
-  //       case SortType.DATE_UP:
-  //         sortedTasks = tasks.slice().sort((a, b) => a.dueDate - b.dueDate);
-  //         break;
-  //       case SortType.DATE_DOWN:
-  //         sortedTasks = tasks.slice().sort((a, b) => b.dueDate - a.dueDate);
-  //         break;
-  //       case SortType.DEFAULT:
-  //         sortedTasks = tasks.slice(0, showingTasksCount);
-  //         break;
-  //     }
-  //
-  //     listElement.innerHTML = ``;
-  //     renderTasks(listElement, sortedTasks);
-  //     if (sortType === SortType.DEFAULT) {
-  //       renderLoadMoreButton();
-  //     } else {
-  //       remove(this._loadMoreButtonComponent);
-  //     }
-  //   });
-  // }
 }
