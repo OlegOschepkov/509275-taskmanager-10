@@ -1,7 +1,6 @@
 import BoardComponent from './components/board.js';
 import BoardController from './controllers/board-controller.js';
 import TasksModel from './models/tasks.js';
-import FilterComponent from './components/filter.js';
 import FilterController from './controllers/filter-controller.js';
 import SiteMenuComponent from './components/menu.js';
 import {generateTasks} from './mock/task.js';

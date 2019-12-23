@@ -50,8 +50,6 @@ export default class BoardController {
     render(container, this._sortComponent, RenderPosition.BEFOREEND);
     render(container, this._tasksListComponent, RenderPosition.BEFOREEND);
 
-
-
     this._renderLoadMoreButton();
 
     this._renderTasks(tasks.slice(0, this._showingTasksCount));
